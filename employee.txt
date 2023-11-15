@@ -1,0 +1,124 @@
+Enter password: *********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 35
+Server version: 8.1.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use Employee
+Database changed
+mysql> CREATE TABLE emp1 (
+    ->             S_No INT,
+    ->             Name VARCHAR(50),
+    ->             Designation VARCHAR(50),
+    ->             Branch VARCHAR(50)
+    ->      );
+Query OK, 0 rows affected (0.41 sec)
+
+mysql> INSERT INTO emp1 (S_No, Name, Designation, Branch)
+    -> VALUES
+    ->     (1, 'Suresh', 'Manager', 'Chennai'),
+    ->     (2, 'Ramesh', 'Supervisor', 'Madurai'),
+    ->     (3, 'Hari', 'Assistant', 'Trichy');
+Query OK, 3 rows affected (0.04 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM emp1;
++------+--------+-------------+---------+
+| S_No | Name   | Designation | Branch  |
++------+--------+-------------+---------+
+|    1 | Suresh | Manager     | Chennai |
+|    2 | Ramesh | Supervisor  | Madurai |
+|    3 | Hari   | Assistant   | Trichy  |
++------+--------+-------------+---------+
+3 rows in set (0.03 sec)
+
+mysql> ALTER TABLE emp1
+    -> ADD Salary DECIMAL(10, 2);
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM emp1;
++------+--------+-------------+---------+--------+
+| S_No | Name   | Designation | Branch  | Salary |
++------+--------+-------------+---------+--------+
+|    1 | Suresh | Manager     | Chennai |   NULL |
+|    2 | Ramesh | Supervisor  | Madurai |   NULL |
+|    3 | Hari   | Assistant   | Trichy  |   NULL |
++------+--------+-------------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> ALTER TABLE emp1
+    -> CHANGE Name Newname VARCHAR(50);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM emp1;
++------+---------+-------------+---------+--------+
+| S_No | Newname | Designation | Branch  | Salary |
++------+---------+-------------+---------+--------+
+|    1 | Suresh  | Manager     | Chennai |   NULL |
+|    2 | Ramesh  | Supervisor  | Madurai |   NULL |
+|    3 | Hari    | Assistant   | Trichy  |   NULL |
++------+---------+-------------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> DESCRIBE emp1;
++-------------+---------------+------+-----+---------+-------+
+| Field       | Type          | Null | Key | Default | Extra |
++-------------+---------------+------+-----+---------+-------+
+| S_No        | int           | YES  |     | NULL    |       |
+| Newname     | varchar(50)   | YES  |     | NULL    |       |
+| Designation | varchar(50)   | YES  |     | NULL    |       |
+| Branch      | varchar(50)   | YES  |     | NULL    |       |
+| Salary      | decimal(10,2) | YES  |     | NULL    |       |
++-------------+---------------+------+-----+---------+-------+
+5 rows in set (0.09 sec)
+
+mysql> SELECT * FROM emp1;
++------+---------+-------------+---------+--------+
+| S_No | Newname | Designation | Branch  | Salary |
++------+---------+-------------+---------+--------+
+|    1 | Suresh  | Manager     | Chennai |   NULL |
+|    2 | Ramesh  | Supervisor  | Madurai |   NULL |
+|    3 | Hari    | Assistant   | Trichy  |   NULL |
++------+---------+-------------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> RENAME TABLE emp1 TO emp2;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> SELECT * FROM emp2;
++------+---------+-------------+---------+--------+
+| S_No | Newname | Designation | Branch  | Salary |
++------+---------+-------------+---------+--------+
+|    1 | Suresh  | Manager     | Chennai |   NULL |
+|    2 | Ramesh  | Supervisor  | Madurai |   NULL |
+|    3 | Hari    | Assistant   | Trichy  |   NULL |
++------+---------+-------------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> DELETE FROM emp2 WHERE S_No = 2;
+Query OK, 1 row affected (0.05 sec)
+
+mysql> SELECT * FROM emp2;
++------+---------+-------------+---------+--------+
+| S_No | Newname | Designation | Branch  | Salary |
++------+---------+-------------+---------+--------+
+|    1 | Suresh  | Manager     | Chennai |   NULL |
+|    3 | Hari    | Assistant   | Trichy  |   NULL |
++------+---------+-------------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> DROP TABLE emp2;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> SELECT * FROM emp2;
+ERROR 1146 (42S02): Table 'employee.emp2' doesn't exist
+mysql>
