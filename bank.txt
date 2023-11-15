@@ -1,0 +1,93 @@
+Enter password: *********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 40
+Server version: 8.1.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE DATABASE bank;
+Query OK, 1 row affected (0.07 sec)
+
+mysql> use bank;
+Database changed
+mysql> CREATE TABLE bank1 (
+    -> s_no INT,
+    -> cus_name VARCHAR(50);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+mysql> use bank;
+Database changed
+mysql> CREATE TABLE bank1 (
+    -> s_no INT,
+    ->  cus_name VARCHAR(50),
+    -> acc_no INT,
+    -> balance INT,
+    -> cus_branch VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> INSERT INTO bank1(s_no, cus_name, acc_no, balance, cus_branch)
+    -> VALUES
+    -> (1, 'RAMESH', 12378, 100000, 'Adyar'),
+    -> (2, 'SAM', 12367, 152500, 'Mylapore'),
+    -> (3, 'HARISH', 12345, 250000, 'Anna Salai');
+Query OK, 3 rows affected (0.06 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM bank1;
++------+----------+--------+---------+------------+
+| s_no | cus_name | acc_no | balance | cus_branch |
++------+----------+--------+---------+------------+
+|    1 | RAMESH   |  12378 |  100000 | Adyar      |
+|    2 | SAM      |  12367 |  152500 | Mylapore   |
+|    3 | HARISH   |  12345 |  250000 | Anna Salai |
++------+----------+--------+---------+------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM bank1 WHERE cus_name = 'RAMESH';
++------+----------+--------+---------+------------+
+| s_no | cus_name | acc_no | balance | cus_branch |
++------+----------+--------+---------+------------+
+|    1 | RAMESH   |  12378 |  100000 | Adyar      |
++------+----------+--------+---------+------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM bank1 WHERE balance > 150000;
++------+----------+--------+---------+------------+
+| s_no | cus_name | acc_no | balance | cus_branch |
++------+----------+--------+---------+------------+
+|    2 | SAM      |  12367 |  152500 | Mylapore   |
+|    3 | HARISH   |  12345 |  250000 | Anna Salai |
++------+----------+--------+---------+------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM bank1 WHERE balance BETWEEN 100000 AND 250000;
++------+----------+--------+---------+------------+
+| s_no | cus_name | acc_no | balance | cus_branch |
++------+----------+--------+---------+------------+
+|    1 | RAMESH   |  12378 |  100000 | Adyar      |
+|    2 | SAM      |  12367 |  152500 | Mylapore   |
+|    3 | HARISH   |  12345 |  250000 | Anna Salai |
++------+----------+--------+---------+------------+
+3 rows in set (0.00 sec)
+
+mysql> UPDATE bank1 SET cus_branch = 'poonamalle' WHERE s_no = 2;
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM bank1;
++------+----------+--------+---------+------------+
+| s_no | cus_name | acc_no | balance | cus_branch |
++------+----------+--------+---------+------------+
+|    1 | RAMESH   |  12378 |  100000 | Adyar      |
+|    2 | SAM      |  12367 |  152500 | poonamalle |
+|    3 | HARISH   |  12345 |  250000 | Anna Salai |
++------+----------+--------+---------+------------+
+3 rows in set (0.00 sec)
+
+mysql>
